@@ -70,7 +70,7 @@
       var iframe = document.createElement('iframe');
       iframe.title = 'Mapa de Google con la ubicación de cartanos: calle José Carreras, 9, Dos Hermanas';
       iframe.loading = 'lazy';
-      iframe.referrerPolicy = 'no-referrer-when-downgrade';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
       iframe.allowFullscreen = true;
       iframe.src = 'https://www.google.com/maps?q=Calle%20Jos%C3%A9%20Carreras%209%2C%2041701%20Dos%20Hermanas%2C%20Sevilla&output=embed';
       mapa.textContent = '';
@@ -113,6 +113,11 @@
         if (campo.hasAttribute('aria-invalid') || campo.value) mensajeCampo(campo);
       });
       campo.addEventListener('change', function () {
+        if (campo.hasAttribute('aria-invalid')) mensajeCampo(campo);
+      });
+      /* el aviso se quita mientras se corrige, no al salir del campo:
+         si desapareciera al pulsar «Enviar», el botón se movería y el clic se perdería */
+      campo.addEventListener('input', function () {
         if (campo.hasAttribute('aria-invalid')) mensajeCampo(campo);
       });
     });

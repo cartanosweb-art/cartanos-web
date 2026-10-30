@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com https://maps.google.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Asesoría fiscal, laboral y contable en Dos Hermanas | cartanos</title>
 <meta name="description" content="Asesoría fiscal, laboral, contable y jurídica en Dos Hermanas (Sevilla) desde 1987. Autónomos, pymes, grandes empresas y particulares, con un trato cercano y personalizado.">
 <link rel="canonical" href="https://www.cartanos.es/">
@@ -20,8 +22,8 @@
 <meta property="og:image:alt" content="Entrada del despacho de cartanos en Dos Hermanas, con el rótulo verde sobre la puerta">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="192x192" href="assets/img/icono-192.png">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <link rel="preload" href="assets/fonts/cormorant-garamond-500.woff2" as="font" type="font/woff2" crossorigin>
@@ -220,7 +222,7 @@
           <div class="visita">
             <p>Calle José Carreras, 9<br>41701 Dos Hermanas, Sevilla</p>
             <p>De lunes a jueves, de 9:00 a 13:30 y de 16:30 a 20:00. Los viernes, de 8:00 a 15:00.</p>
-            <a class="boton boton--crema" href="https://www.google.com/maps/dir/?api=1&amp;destination=Calle+Jos%C3%A9+Carreras+9+41701+Dos+Hermanas+Sevilla" target="_blank" rel="noopener">Cómo llegar<span class="solo-lectores"> (abre Google Maps en otra pestaña)</span></a>
+            <a class="boton boton--crema" href="https://www.google.com/maps/dir/?api=1&amp;destination=Calle+Jos%C3%A9+Carreras+9+41701+Dos+Hermanas+Sevilla" target="_blank" rel="noopener noreferrer">Cómo llegar<span class="solo-lectores"> (abre Google Maps en otra pestaña)</span></a>
           </div>
         </div>
       </div>
@@ -257,7 +259,7 @@
           <div>
             <div class="estrellas" aria-hidden="true">★★★★★</div>
             <p>de media en Google</p>
-            <a class="boton boton--contorno-claro" href="https://search.google.com/local/reviews?placeid=ChIJIYA292BwEg0RgMnsq7ZyWgM" target="_blank" rel="noopener">Ver las reseñas en Google<span class="solo-lectores"> (se abre en otra pestaña)</span></a>
+            <a class="boton boton--contorno-claro" href="https://search.google.com/local/reviews?placeid=ChIJIYA292BwEg0RgMnsq7ZyWgM" target="_blank" rel="noopener noreferrer">Ver las reseñas en Google<span class="solo-lectores"> (se abre en otra pestaña)</span></a>
           </div>
         </div>
       </div>
@@ -265,14 +267,14 @@
       <figure class="resena-destacada">
         <div class="estrellas" role="img" aria-label="5 de 5 estrellas">★★★★★</div>
         <blockquote><p>Llevan años gestionándome todos mis temas de papeleos, rentas, impuestos, liquidaciones de herencias… y me asesoran sobre todas las dudas que me surgen. Un equipo muy profesional y además de cercano, con magníficas personas.</p></blockquote>
-        <figcaption><strong>Juan M. Sotomayor</strong><span>Reseña en Google</span></figcaption>
+        <figcaption><strong>Juan M. S.</strong><span>Reseña en Google</span></figcaption>
       </figure>
 
       <ul class="resenas" role="list">
         <li class="resena"><figure>
           <div class="estrellas" role="img" aria-label="5 de 5 estrellas">★★★★★</div>
           <blockquote><p>Maravillosos profesionales, jamás he encontrado a personas tan cualificadas. El cuidado al cliente es extraordinario.</p></blockquote>
-          <figcaption><strong>Marta Barroso</strong><span>Reseña en Google</span></figcaption>
+          <figcaption><strong>Marta B.</strong><span>Reseña en Google</span></figcaption>
         </figure></li>
         <li class="resena"><figure>
           <div class="estrellas" role="img" aria-label="5 de 5 estrellas">★★★★★</div>
@@ -282,7 +284,7 @@
         <li class="resena"><figure>
           <div class="estrellas" role="img" aria-label="5 de 5 estrellas">★★★★★</div>
           <blockquote><p>Me llevan el alquiler de piso, contratos, etc. Son muy responsables y amables, buen precio, trato muy personalizado y resolutivo. Gracias por vuestro trato.</p></blockquote>
-          <figcaption><strong>Amparo Rubio Caro</strong><span>Reseña en Google</span></figcaption>
+          <figcaption><strong>Amparo R. C.</strong><span>Reseña en Google</span></figcaption>
         </figure></li>
         <li class="resena"><figure>
           <div class="estrellas" role="img" aria-label="5 de 5 estrellas">★★★★★</div>
@@ -325,7 +327,7 @@
           <p>El mapa es de Google y no se carga hasta que lo pidas.</p>
           <div class="mapa__botones">
             <button class="boton boton--contorno" id="cargarMapa" type="button">Cargar mapa</button>
-            <a class="boton boton--contorno" href="https://www.google.com/maps/dir/?api=1&amp;destination=Calle+Jos%C3%A9+Carreras+9+41701+Dos+Hermanas+Sevilla" target="_blank" rel="noopener">Cómo llegar<span class="solo-lectores"> (abre Google Maps en otra pestaña)</span></a>
+            <a class="boton boton--contorno" href="https://www.google.com/maps/dir/?api=1&amp;destination=Calle+Jos%C3%A9+Carreras+9+41701+Dos+Hermanas+Sevilla" target="_blank" rel="noopener noreferrer">Cómo llegar<span class="solo-lectores"> (abre Google Maps en otra pestaña)</span></a>
           </div>
         </div>
       </div>
