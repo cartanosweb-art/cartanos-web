@@ -1,4 +1,4 @@
-/* cartanos · menú móvil, mapa bajo demanda y formulario de contacto (Web3Forms) */
+/* Cartanos · menú móvil, mapa bajo demanda y formulario de contacto (Web3Forms) */
 (function () {
   'use strict';
 
@@ -68,7 +68,7 @@
     botonMapa.addEventListener('click', function () {
       var mapa = document.getElementById('mapa');
       var iframe = document.createElement('iframe');
-      iframe.title = 'Mapa de Google con la ubicación de cartanos: calle José Carreras, 9, Dos Hermanas';
+      iframe.title = 'Mapa de Google con la ubicación de Cartanos: calle José Carreras, 9, Dos Hermanas';
       iframe.loading = 'lazy';
       iframe.referrerPolicy = 'strict-origin-when-cross-origin';
       iframe.allowFullscreen = true;
