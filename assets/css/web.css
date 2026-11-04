@@ -290,11 +290,14 @@ h3 { font-weight: 600; letter-spacing: -.005em; }
 .portada__acciones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
 @media (max-width: 420px) { .portada__acciones .boton { width: 100%; } }
 
-/* tres datos con filetes, como un libro de cuentas */
-.libro { margin-top: clamp(2.25rem, 4vw, 3.25rem); border-top: 1px solid var(--linea-clara); }
-.libro__fila { display: flex; align-items: baseline; justify-content: space-between; gap: 1.5rem; padding-block: .8rem; border-bottom: 1px solid var(--linea-clara); }
-.libro dt { font-size: .9375rem; color: var(--crema-suave); }
-.libro dd { font-family: var(--serif); font-size: clamp(2.25rem, 3.2vw, 3rem); font-weight: 500; line-height: .95; color: var(--crema); }
+/* el año de apertura: la frase en cursiva y el año grande, abajo, a la altura del pie de la foto */
+.desde { margin-top: clamp(2.75rem, 6vw, 3.5rem); }
+.desde__texto { display: block; font-family: var(--serif); font-size: clamp(1.25rem, 1.6vw, 1.5rem); font-style: italic; font-weight: 500; line-height: 1.2; color: var(--crema-suave); }
+.desde__ano { display: block; margin-top: -.02em; font-family: var(--serif); font-size: clamp(5rem, 8.5vw, 9rem); font-weight: 500; line-height: .8; letter-spacing: -.02em; color: var(--crema); }
+@media (min-width: 1000px) {
+  .portada__texto { display: flex; flex-direction: column; }
+  .desde { margin-top: auto; padding-top: 2.5rem; }
+}
 
 .portada__foto { position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: var(--radio-tarjeta); background: var(--verde-700); }
 @media (min-width: 1000px) { .portada__foto { aspect-ratio: auto; min-height: 26rem; } }
@@ -545,9 +548,14 @@ h3 { font-weight: 600; letter-spacing: -.005em; }
   .formulario .boton { justify-self: stretch; }
 }
 
-/* ---------- pie: sobre el verde, con el logotipo a todo lo ancho ---------- */
-.pie { padding-block: clamp(4.5rem, 9vw, 8rem) 1.75rem; color: var(--gris-verde); }
-.pie__arriba { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
+/* ---------- pie: sobre el verde, con el logotipo debajo ---------- */
+.pie { padding-block: clamp(4.5rem, 9vw, 8rem) clamp(2rem, 4vw, 3rem); color: var(--gris-verde); }
+/* arriba las columnas; abajo el logotipo a la izquierda y los datos legales a la derecha, en la misma línea */
+.pie > .contenedor { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: end; column-gap: 3rem; }
+.pie__arriba {
+  grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); gap: 2.5rem;
+  padding-bottom: clamp(3rem, 6vw, 5rem); border-bottom: 1px solid var(--linea-clara);
+}
 .pie__frase { max-width: 22rem; font-family: var(--serif); font-size: clamp(1.5rem, 2vw, 1.9rem); font-weight: 500; line-height: 1.2; color: var(--crema); }
 .pie h2 {
   margin-bottom: 1rem; font-family: var(--sans); font-size: .8125rem; font-weight: 600; line-height: 1.4;
@@ -558,19 +566,21 @@ h3 { font-weight: 600; letter-spacing: -.005em; }
 .pie .pie__frase { font-size: clamp(1.5rem, 2vw, 1.9rem); }
 .pie ul a { color: var(--gris-verde); text-decoration: none; }
 .pie ul a:hover { color: var(--crema); text-decoration: underline; text-underline-offset: 3px; }
-.pie__rotulo { width: 100%; height: auto; margin-top: clamp(4rem, 9vw, 8rem); }
-.pie__abajo {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
-  margin-top: clamp(1.75rem, 3vw, 2.5rem); padding-top: 1.5rem; border-top: 1px solid var(--linea-clara);
-  font-size: .875rem; color: #A9B1A4;
-}
+.pie__rotulo { width: clamp(14rem, 34vw, 32rem); height: auto; margin-top: clamp(2.5rem, 5vw, 4rem); }
+.pie__abajo { display: flex; flex-direction: column; align-items: flex-end; gap: .6rem; text-align: right; font-size: .875rem; color: #A9B1A4; }
 .pie__abajo p { font-size: .875rem; }
-.pie .pie__legal { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
+.pie .pie__legal { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem 1.25rem; }
 .pie .pie__legal a { color: #A9B1A4; }
 
 @media (max-width: 1000px) {
   .pie__arriba { grid-template-columns: 1fr 1fr; }
   .pie__frase { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+  .pie > .contenedor { display: block; }
+  .pie__rotulo { width: min(72%, 17rem); }
+  .pie__abajo { align-items: flex-start; margin-top: 1.75rem; text-align: left; }
+  .pie .pie__legal { justify-content: flex-start; }
 }
 @media (max-width: 560px) {
   .pie__arriba { grid-template-columns: 1fr; }
