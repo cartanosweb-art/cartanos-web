@@ -273,9 +273,9 @@ h3 { font-weight: 600; letter-spacing: -.005em; }
   .lema__recta, .lema__cursiva { display: inline; }
 }
 .portada__titulo .donde {
-  display: block; max-width: 50rem; margin-top: clamp(1.75rem, 2.5vw, 2rem);
-  font-family: var(--sans); font-size: clamp(1.0625rem, 1.5vw, 1.3125rem); font-weight: 500;
-  line-height: 1.4; letter-spacing: 0; color: var(--crema-suave);
+  display: block; max-width: 34ch; margin-top: clamp(1.75rem, 2.5vw, 2.25rem);
+  font-family: var(--sans); font-size: clamp(1.3125rem, 2.1vw, 1.875rem); font-weight: 500;
+  line-height: 1.3; letter-spacing: -.005em; color: var(--crema);
 }
 
 .portada__cuerpo {
@@ -286,18 +286,10 @@ h3 { font-weight: 600; letter-spacing: -.005em; }
 @media (min-width: 1000px) {
   .portada__cuerpo { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(3rem, 5vw, 6rem); }
 }
-.portada__intro { max-width: 34rem; font-size: clamp(1.0625rem, 1.25vw, 1.25rem); line-height: 1.6; color: var(--crema-suave); }
+.portada__intro { max-width: 34rem; font-size: clamp(1.125rem, 1.4vw, 1.375rem); line-height: 1.55; color: var(--crema-suave); }
 .portada__acciones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
 @media (max-width: 420px) { .portada__acciones .boton { width: 100%; } }
 
-/* el año de apertura: la frase en cursiva y el año grande, abajo, a la altura del pie de la foto */
-.desde { margin-top: clamp(2.75rem, 6vw, 3.5rem); }
-.desde__texto { display: block; font-family: var(--serif); font-size: clamp(1.25rem, 1.6vw, 1.5rem); font-style: italic; font-weight: 500; line-height: 1.2; color: var(--crema-suave); }
-.desde__ano { display: block; margin-top: -.02em; font-family: var(--serif); font-size: clamp(5rem, 8.5vw, 9rem); font-weight: 500; line-height: .8; letter-spacing: -.02em; color: var(--crema); }
-@media (min-width: 1000px) {
-  .portada__texto { display: flex; flex-direction: column; }
-  .desde { margin-top: auto; padding-top: 2.5rem; }
-}
 
 .portada__foto { position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: var(--radio-tarjeta); background: var(--verde-700); }
 @media (min-width: 1000px) { .portada__foto { aspect-ratio: auto; min-height: 26rem; } }
@@ -316,7 +308,6 @@ h3 { font-weight: 600; letter-spacing: -.005em; }
   .js .entrada--2 { animation-delay: .2s; }
   .js .entrada--3 { animation-delay: .32s; }
   .js .entrada--4 { animation-delay: .42s; }
-  .js .entrada--5 { animation-delay: .52s; }
   .js .portada__foto img { clip-path: inset(0 50% 0 50%); animation: abrirPuertas 1.5s cubic-bezier(.65, 0, .15, 1) .25s forwards; }
   .js .portada__foto figcaption { opacity: 0; animation: aparecer .8s var(--ease) 1.4s forwards; }
 }
