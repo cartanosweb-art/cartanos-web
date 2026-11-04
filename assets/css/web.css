@@ -262,9 +262,11 @@ h3 { font-weight: 600; letter-spacing: -.005em; }
 
 /* ---------- portada: verde liso, el lema a todo lo ancho y la entrada del despacho ---------- */
 .portada { overflow: hidden; padding-block: clamp(1.75rem, 4vw, 3.25rem) clamp(2rem, 4vw, 3rem); }
-/* margen negativo = el blanco lateral de la «C»: así la C y la línea de debajo empiezan en la misma vertical */
+/* lema y línea de debajo centrados, como el logotipo y su línea en el rótulo */
+.portada__titulo { text-align: center; }
+/* −0,025 em: compensa el blanco lateral de la «C» para que el lema quede centrado a la vista */
 .portada__titulo .lema {
-  display: block; margin-left: -.046em; font-size: 21vw; font-weight: 500;
+  position: relative; left: -.025em; display: block; font-size: 21vw; font-weight: 500;
   line-height: .86; letter-spacing: -.03em; color: var(--crema);
 }
 .lema__recta, .lema__cursiva { display: block; }
@@ -273,13 +275,16 @@ h3 { font-weight: 600; letter-spacing: -.005em; }
   .portada__titulo .lema { font-size: min(11vw, 12.25rem); white-space: nowrap; }
   .lema__recta, .lema__cursiva { display: inline; }
 }
-/* debajo del lema, en una sola línea desde 700 px (mide 32,5 em: cabe con margen en el 90 % del ancho) */
+/* la línea de debajo, en latón y entre dos filetes; en una sola línea desde 700 px (mide 32,5 em) */
 .portada__titulo .donde {
   display: block; margin-top: clamp(1.5rem, 2.2vw, 2rem);
   font-family: var(--sans); font-size: clamp(1rem, 1.65vw, 1.5rem); font-weight: 400;
-  line-height: 1.35; letter-spacing: 0; color: var(--crema-suave);
+  line-height: 1.35; letter-spacing: 0; color: var(--laton);
 }
-@media (min-width: 700px) { .portada__titulo .donde { white-space: nowrap; } }
+@media (min-width: 700px) {
+  .portada__titulo .donde { display: flex; align-items: center; justify-content: center; gap: clamp(.75rem, 1.5vw, 1.25rem); white-space: nowrap; }
+  .portada__titulo .donde::before, .portada__titulo .donde::after { content: ""; flex: none; width: clamp(1.25rem, 4vw, 4rem); height: 1px; background: currentColor; opacity: .7; }
+}
 
 .portada__cuerpo {
   display: grid; gap: clamp(2.25rem, 5vw, 3rem);
