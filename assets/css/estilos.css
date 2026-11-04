@@ -426,6 +426,29 @@ h3 { font-weight: 600; letter-spacing: -.005em; }
 .resena figcaption strong { display: block; font-size: 1rem; font-weight: 600; color: var(--crema); }
 .resena figcaption span { font-size: .875rem; color: #B9BFB3; }
 
+/* ---------- empresas que confían: cinta de logotipos ---------- */
+.clientes { position: relative; margin-top: clamp(3.5rem, 7vw, 6rem); }
+.clientes__titulo { padding-top: 2rem; border-top: 1px solid var(--linea-clara); margin-bottom: clamp(1.75rem, 3vw, 2.5rem); font-family: var(--sans); font-size: .9375rem; font-weight: 500; letter-spacing: .04em; color: var(--crema-suave); }
+.clientes__pista { display: flex; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+/* dos listas iguales seguidas: cuando la primera ha salido entera, la segunda ocupa su sitio y el giro no se nota */
+.clientes__lista { --hueco: clamp(3rem, 6vw, 5.5rem); display: flex; flex: none; align-items: center; gap: var(--hueco); padding-right: var(--hueco); list-style: none; animation: clientes-pasan 58s linear infinite; }
+.clientes__pista:hover .clientes__lista { animation-play-state: paused; }
+.clientes__lista li { flex: none; }
+.clientes__lista img { width: auto; max-width: none; height: 2.75rem; opacity: .9; }
+.clientes__lista .cliente--botiq img { height: 2.5rem; }
+.clientes__lista .cliente--wolcott img { height: 2.625rem; }
+@media (max-width: 699px) {
+  .clientes__lista img { height: 2.35rem; }
+  .clientes__lista .cliente--botiq img { height: 2.15rem; }
+  .clientes__lista .cliente--wolcott img { height: 2.25rem; }
+}
+@keyframes clientes-pasan { to { transform: translateX(-100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .clientes__pista { -webkit-mask-image: none; mask-image: none; justify-content: center; }
+  .clientes__lista { animation: none; flex-wrap: wrap; justify-content: center; row-gap: 2rem; padding-right: 0; }
+  .clientes__lista[aria-hidden="true"], .clientes__rep { display: none; }
+}
+
 /* ---------- contacto ---------- */
 /* móvil: título, formulario y datos; pantallas anchas: título y datos a la izquierda, formulario a la derecha */
 .contacto { display: grid; gap: clamp(2rem, 4vw, 3rem); grid-template-areas: "cabeza" "formulario" "datos"; }
