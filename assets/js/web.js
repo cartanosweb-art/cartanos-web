@@ -1,14 +1,11 @@
-/* Cartanos · menú móvil, mapa bajo demanda y formulario de contacto (Web3Forms) */
+/* Cartanos · menú móvil, cinta de clientes, mapa bajo demanda y formulario de contacto (Web3Forms) */
 (function () {
   'use strict';
+  var raiz = document.documentElement;
 
-  /* ---- cabecera: transparente sobre la portada, sólida al bajar ---- */
-  var cabecera = document.querySelector('.cabecera');
-  if (cabecera) {
-    var fondo = function () { cabecera.classList.toggle('con-fondo', window.scrollY > 12); };
-    window.addEventListener('scroll', fondo, { passive: true });
-    fondo();
-  }
+  /* ---- con el tabulador la página salta al momento: el foco no se queda fuera de la pantalla mientras se desliza ---- */
+  document.addEventListener('keydown', function (e) { if (e.key === 'Tab') raiz.classList.add('teclado'); });
+  document.addEventListener('pointerdown', function () { raiz.classList.remove('teclado'); });
 
   /* ---- menú lateral en móvil ---- */
   var menu = document.getElementById('menu');
@@ -62,6 +59,16 @@
     else if (movil.addListener) movil.addListener(alCambiar);
   }
 
+  /* ---- cinta de clientes: su botón la para y la vuelve a mover ---- */
+  var pausa = document.getElementById('pausarClientes');
+  if (pausa) {
+    pausa.addEventListener('click', function () {
+      var parada = pausa.getAttribute('aria-pressed') !== 'true';
+      pausa.setAttribute('aria-pressed', parada ? 'true' : 'false');
+      pausa.closest('.clientes').classList.toggle('clientes--parada', parada);
+    });
+  }
+
   /* ---- mapa de Google: solo si se pide ---- */
   var botonMapa = document.getElementById('cargarMapa');
   if (botonMapa) {
@@ -76,6 +83,8 @@
       mapa.textContent = '';
       mapa.appendChild(iframe);
       mapa.classList.add('cargado');
+      /* el botón ya no está: el foco pasa al mapa para no perder el sitio con el teclado */
+      iframe.focus();
     });
   }
 
@@ -108,6 +117,22 @@
       estado.innerHTML = html;
     };
 
+    /* si alguien sale de la página con el mensaje a medio escribir, el navegador le avisa */
+    var sinEnviar = false;
+    var avisarSalida = function (e) { e.preventDefault(); e.returnValue = ''; };
+    var marcarSinEnviar = function (si) {
+      if (si === sinEnviar) return;
+      sinEnviar = si;
+      if (si) window.addEventListener('beforeunload', avisarSalida);
+      else window.removeEventListener('beforeunload', avisarSalida);
+    };
+    form.addEventListener('input', function () {
+      marcarSinEnviar(['nombre', 'email', 'telefono', 'mensaje'].some(function (id) {
+        var campo = document.getElementById(id);
+        return campo && campo.value.trim() !== '';
+      }));
+    });
+
     Array.prototype.forEach.call(form.querySelectorAll('input, textarea'), function (campo) {
       campo.addEventListener('blur', function () {
         if (campo.hasAttribute('aria-invalid') || campo.value) mensajeCampo(campo);
@@ -122,8 +147,10 @@
       });
     });
 
+    var enviando = false;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (enviando) return;
       ponerEstado('', '');
 
       var primeroMal = null;
@@ -146,23 +173,31 @@
       var datos = new FormData(form);
       datos.delete('redirect');
       var textoBoton = boton.textContent;
-      boton.disabled = true;
+      /* el botón no se desactiva del todo: así el foco no se pierde mientras se envía */
+      enviando = true;
+      boton.setAttribute('aria-disabled', 'true');
       boton.textContent = 'Enviando…';
+      /* si el servicio no contesta en 15 segundos, se da el envío por fallido y se ofrecen el correo y el teléfono */
+      var control = window.AbortController ? new AbortController() : null;
+      var espera = control ? window.setTimeout(function () { control.abort(); }, 15000) : 0;
 
-      fetch(form.action, { method: 'POST', body: datos, headers: { Accept: 'application/json' } })
+      fetch(form.action, { method: 'POST', body: datos, headers: { Accept: 'application/json' }, signal: control ? control.signal : undefined })
         .then(function (r) {
           return r.json().then(function (j) { return { ok: r.ok, json: j }; });
         })
         .then(function (res) {
           if (!res.ok || !res.json || !res.json.success) throw new Error('envio');
           form.reset();
+          marcarSinEnviar(false);
           ponerEstado('ok', 'Mensaje enviado. Te responderemos lo antes posible.');
         })
         .catch(function () {
           ponerEstado('error', 'No se ha podido enviar el mensaje. ' + contacto);
         })
         .then(function () {
-          boton.disabled = false;
+          window.clearTimeout(espera);
+          enviando = false;
+          boton.removeAttribute('aria-disabled');
           boton.textContent = textoBoton;
         });
     });
